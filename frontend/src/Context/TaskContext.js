@@ -30,6 +30,7 @@ export const TaskProvider = ({ children }) => {
     const fetchData = async () => {
         try {
             const response = await axios.get(`${apiUrl}/tasks`);
+            console.log("response.data", response.data)
             setTasks(response.data);
             setFilteredTasks(response.data);
             setTotalTasks(response.data.length);
@@ -59,24 +60,25 @@ export const TaskProvider = ({ children }) => {
         }
     };
 
-    const addTask = async (title, description, status) => {
+    const addTask = async (title, description, dueDate, status) => {
         try {
             const response = await axios.post(`${apiUrl}/tasks`, {
                 title,
                 description,
+                dueDate,
                 status,
             });
             setTasks([...tasks, response.data]);
-    
-            if (status === "completed") {
+
+            if (status === 'completed') {
                 setCompletedTasks((prev) => prev + 1);
-            } else if (status === "in-progress") {
-                // Add counter for in-progress
+            } else if (status === 'in-progress') {
+                setInProgressTasks((prev) => prev + 1);
             } else {
                 setTodoTasks((prev) => prev + 1);
             }
-    
-            setTotalTasks((prev) => prev + 1);
+
+        setTotalTasks((prev) => prev + 1);
         } catch (err) {
             console.error("Error adding task:", err);
         }

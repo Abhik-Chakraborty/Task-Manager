@@ -49,12 +49,20 @@ app.get('/tasks', (req, res) => {
 
 // Create New Task
 app.post('/tasks', (req, res) => {
+    const { title, description, status, dueDate } = req.body;
+    
+    if (dueDate && isNaN(new Date(dueDate).getTime())) {
+        return res.status(400).json({ message: 'Invalid due date' });
+    }
+
     const task = {
         _id: Math.random().toString(36).substr(2, 9), // Generate a unique ID
-        title: req.body.title,
-        description: req.body.description,
-        status: req.body.status,
+        title: title,
+        description: description,
+        status: status || 'todo',
+        dueDate: dueDate ? new Date(dueDate).toISOString() : null,
     };
+
     tasks.push(task);
     saveTasks(); // Save to file
     res.status(201).json(task);
