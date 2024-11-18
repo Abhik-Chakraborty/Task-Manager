@@ -85,6 +85,12 @@ function TaskList() {
                         <p className="text-sm text-gray-500">
                             Due Date: {task.dueDate ? new Date(task.dueDate).toLocaleDateString() : 'No due date set'}
                         </p>
+                        <p className="text-sm text-gray-400">
+                            Created At : {new Date(task.createdOn).toLocaleString()}
+                        </p>
+                        <p className= "text-sm text-gray-400">
+                            Updated At : {new Date(task.lastEditedOn).toLocaleString()}
+                        </p>
                     </div>
                     {isDropdownOpen(task._id) && (
                         <div className="absolute top-full right-0 mt-2 w-48 bg-white border rounded-md shadow-md z-10">

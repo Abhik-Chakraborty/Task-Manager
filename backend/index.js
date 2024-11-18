@@ -51,22 +51,24 @@ app.get('/tasks', (req, res) => {
 // Create New Task
 app.post('/tasks', (req, res) => {
     const { title, description, status, dueDate } = req.body;
-    
-    if (dueDate && isNaN(new Date(dueDate).getTime())) {
-        return res.status(400).json({ message: 'Invalid due date' });
+
+    if (!title || !description) {
+        return res.status(400).json({ message: 'Title and description are required' });
     }
 
     const task = {
         _id: Math.random().toString(36).substr(2, 9), // Generate a unique ID
-        title: title,
-        description: description,
+        title,
+        description,
         status: status || 'todo',
         dueDate: dueDate ? new Date(dueDate).toISOString() : null,
+        createdOn: new Date().toISOString(), // Add task creation time
+        lastEditedOn: new Date().toISOString(), // Initially, it's the same as createdOn
     };
 
     tasks.push(task);
-    saveTasks(); // Save to file
-    res.status(201).json(task);
+    saveTasks();
+    res.status(201).json(task); // Respond with the new task
 });
 
 // Update Task by ID
@@ -79,11 +81,8 @@ app.put('/tasks/:id', (req, res) => {
     // Update fields
     if (req.body.title) task.title = req.body.title;
     if (req.body.description) task.description = req.body.description;
-    if (req.body.status) task.status = req.body.status;
-
     if (req.body.dueDate) {
         const dueDate = new Date(req.body.dueDate);
-        console.log('Updating Due Date:', dueDate); // Debug due date
         if (!isNaN(dueDate.getTime())) {
             task.dueDate = dueDate.toISOString();
         } else {
@@ -91,7 +90,9 @@ app.put('/tasks/:id', (req, res) => {
         }
     }
 
-    console.log('Task Before Saving:', task); // Debug the updated task
+    // Update the lastEditedOn field
+    task.lastEditedOn = new Date().toISOString();
+
     saveTasks();
     res.json(task); // Respond with the updated task
 });

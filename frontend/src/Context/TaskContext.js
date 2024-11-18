@@ -108,8 +108,9 @@ export const TaskProvider = ({ children }) => {
                 description: updatedDescription,
                 dueDate: updatedDueDate,
             });
+            
     
-            // Reload tasks from the backend
+            // Reload tasks from the backend    
             fetchData();
         } catch (err) {
             console.error('Error editing task:', err);
