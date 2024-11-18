@@ -22,14 +22,14 @@ function Filterbar() {
             </button>
             <button
                 className="filter-button bg-blue-500 hover:bg-blue-600
-                 text-white font-bold py-2 px-4 rounded-r"
+                 text-white font-bold py-2 px-4"
                 onClick={() => handleFilterClick('todo')}
             >
                 Pending
             </button>
             <button
                 className="filter-button bg-blue-500 hover:bg-blue-600
-                text-white font-bold py-2 px-4"
+                 text-white font-bold py-2 px-4 rounded-r"
                 onClick={() => handleFilterClick('in-progress')}
             >
                 In Progress
