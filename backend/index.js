@@ -48,6 +48,15 @@ app.get('/tasks', (req, res) => {
     res.json(filteredTasks);
 });
 
+// Get Task by ID
+app.get('/tasks/:id', (req, res) => {
+    const task = tasks.find((t) => t._id === req.params.id); // Find the task with the given ID
+    if (!task) {
+        return res.status(404).json({ message: 'Task not found' }); // Return 404 if not found
+    }
+    res.json(task); // Respond with the task details
+});
+
 // Create New Task
 app.post('/tasks', (req, res) => {
     const { title, description, status, dueDate } = req.body;
