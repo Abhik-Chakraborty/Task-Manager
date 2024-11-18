@@ -101,23 +101,21 @@ export const TaskProvider = ({ children }) => {
         }
     };
 
-    const editTask = async (
-        taskId,
-        updatedTitle,
-        updatedDescription,
-        updatedStatus
-    ) => {
+    const editTask = async (taskId, updatedTitle, updatedDescription, updatedDueDate) => {
         try {
             await axios.put(`${apiUrl}/tasks/${taskId}`, {
                 title: updatedTitle,
                 description: updatedDescription,
-                status: updatedStatus,
+                dueDate: updatedDueDate,
             });
+    
+            // Reload tasks from the backend
             fetchData();
         } catch (err) {
-            console.error("Error editing task:", err);
+            console.error('Error editing task:', err);
         }
     };
+    
 
     const updateTaskStatus = async (taskId, status) => {
         try {

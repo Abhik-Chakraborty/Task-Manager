@@ -30,6 +30,7 @@ const loadTasks = () => {
 const saveTasks = () => {
     try {
         fs.writeFileSync(filePath, JSON.stringify(tasks, null, 2));
+        console.log('Tasks saved successfully');
     } catch (err) {
         console.error('Error saving tasks:', err.message);
     }
@@ -70,17 +71,29 @@ app.post('/tasks', (req, res) => {
 
 // Update Task by ID
 app.put('/tasks/:id', (req, res) => {
-    const task = tasks.find(t => t._id === req.params.id);
+    const task = tasks.find((t) => t._id === req.params.id);
     if (!task) {
         return res.status(404).json({ message: 'Task not found' });
     }
 
+    // Update fields
     if (req.body.title) task.title = req.body.title;
     if (req.body.description) task.description = req.body.description;
     if (req.body.status) task.status = req.body.status;
 
-    saveTasks(); // Save to file
-    res.json(task);
+    if (req.body.dueDate) {
+        const dueDate = new Date(req.body.dueDate);
+        console.log('Updating Due Date:', dueDate); // Debug due date
+        if (!isNaN(dueDate.getTime())) {
+            task.dueDate = dueDate.toISOString();
+        } else {
+            return res.status(400).json({ message: 'Invalid due date' });
+        }
+    }
+
+    console.log('Task Before Saving:', task); // Debug the updated task
+    saveTasks();
+    res.json(task); // Respond with the updated task
 });
 
 // Mark Task as Complete
