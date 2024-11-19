@@ -1,5 +1,3 @@
-//src/Modals/DeleteModal.jsx
-
 import React from 'react';
 import { useTaskContext } from '../Context/TaskContext';
 

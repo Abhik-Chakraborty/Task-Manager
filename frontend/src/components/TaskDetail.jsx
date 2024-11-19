@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom'; // For accessing route parameters and navigation
+import { useParams, useNavigate } from 'react-router-dom'; 
 import axios from 'axios';
 
 function TaskDetail() {
@@ -10,7 +10,7 @@ function TaskDetail() {
     const [error, setError] = useState(null); // Error state
     const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000'; // API base URL
 
-    // Fetch task details when component loads
+    // Fetch task details when the component loads
     useEffect(() => {
         const fetchTask = async () => {
             try {
@@ -27,12 +27,12 @@ function TaskDetail() {
         fetchTask();
     }, [id, apiUrl]);
 
-    // Handle loading state
+    // Handle loading 
     if (loading) {
         return <div className="text-center mt-10">Loading...</div>;
     }
 
-    // Handle error state
+    // Handle error 
     if (error) {
         return (
             <div className="text-center mt-10">

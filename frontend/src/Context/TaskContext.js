@@ -166,7 +166,7 @@ export const TaskProvider = ({ children }) => {
         totalTasks,
         completedTasks,
         todoTasks,
-        inProgressTasks, // Add in-progress tasks
+        inProgressTasks, 
         handleFilterClick,
         addTask,
         deleteTask,

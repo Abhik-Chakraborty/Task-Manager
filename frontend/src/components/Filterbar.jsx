@@ -24,8 +24,8 @@ function Filterbar() {
                     key={filter.value}
                     className={`filter-button font-bold py-2 px-4 ${
                         activeFilter === filter.value
-                            ? 'bg-blue-600 text-white' // Active button styles
-                            : 'bg-gray-300 text-gray-800 hover:bg-gray-400' // Inactive button styles
+                            ? 'bg-blue-600 text-white' // Active 
+                            : 'bg-gray-300 text-gray-800 hover:bg-gray-400' // Inactive 
                     } ${filter.value === 'all' ? 'rounded-l' : ''} ${
                         filter.value === 'todo' ? 'rounded-r' : ''
                     }`}
