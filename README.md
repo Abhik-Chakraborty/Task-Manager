@@ -1,6 +1,6 @@
 
 # Task Management App
-![TMA Animation](TMA.gif)
+![TMS Animation](TMS.gif)
 
 A full-stack Task Management application that allows users to create, view, update, and delete tasks. Tasks can be filtered based on their status (`All`, `Todo`, `In Progress`, `Completed`) and each task has details like Title, Description, Due Date, Created At, and Updated At. 
 
